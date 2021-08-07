@@ -1,5 +1,5 @@
 
-package com.assignment.spring.api;
+package com.assignment.spring.models.external.openweatherapi;
 
 import java.util.HashMap;
 import java.util.Map;
