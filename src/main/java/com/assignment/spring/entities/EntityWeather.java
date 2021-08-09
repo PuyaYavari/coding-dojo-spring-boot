@@ -2,26 +2,32 @@ package com.assignment.spring.entities;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "weather")
-public class WeatherEntity {
+public class EntityWeather {
 
     @Id
+    @Column(name="id")
+    @JsonProperty("id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column(name="city")
+    @JsonProperty("city")
     private String city;
 
+    @Column(name="country")
+    @JsonProperty("country")
     private String country;
 
+    @Column(name="temperature")
+    @JsonProperty("temperature")
     private Double temperature;
 
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getCity() {

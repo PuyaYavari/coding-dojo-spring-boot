@@ -1,6 +1,6 @@
 package com.assignment.spring.controllers;
 
-import com.assignment.spring.entities.WeatherEntity;
+import com.assignment.spring.entities.EntityWeather;
 import com.assignment.spring.services.ServiceWeather;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ControllerWeather extends ControllerBase {
-
+	
 	@Autowired
 	private ServiceWeather weatherService;
 
     @GetMapping("/weather")
-    public WeatherEntity weather(
+    public EntityWeather weather(
     		@RequestParam(required = true) String city
     ) {
-    	return weatherService.getWeather(city);
+		return weatherService.getWeatherByCity(city); 
     }
 }

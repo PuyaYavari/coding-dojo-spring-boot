@@ -1,68 +1,57 @@
 
 package com.assignment.spring.models.external.openweatherapi;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "coord",
-    "weather",
-    "base",
-    "main",
-    "visibility",
-    "wind",
-    "clouds",
-    "dt",
-    "sys",
-    "id",
-    "name",
-    "cod"
-})
+
 public class WeatherResponse {
 
     @JsonProperty("coord")
-    private Coord coord;
+    private Coordinates coordinates;
+    
     @JsonProperty("weather")
     private List<Weather> weather = null;
+    
     @JsonProperty("base")
     private String base;
+    
     @JsonProperty("main")
     private Main main;
+    
     @JsonProperty("visibility")
     private Integer visibility;
+    
     @JsonProperty("wind")
     private Wind wind;
+    
     @JsonProperty("clouds")
     private Clouds clouds;
+    
     @JsonProperty("dt")
     private Integer dt;
+    
     @JsonProperty("sys")
     private Sys sys;
+    
     @JsonProperty("id")
     private Integer id;
+    
     @JsonProperty("name")
     private String name;
+    
     @JsonProperty("cod")
     private Integer cod;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    
 
     @JsonProperty("coord")
-    public Coord getCoord() {
-        return coord;
+    public Coordinates getCoord() {
+        return coordinates;
     }
 
     @JsonProperty("coord")
-    public void setCoord(Coord coord) {
-        this.coord = coord;
+    public void setCoord(Coordinates coord) {
+        this.coordinates = coord;
     }
 
     @JsonProperty("weather")
@@ -174,15 +163,4 @@ public class WeatherResponse {
     public void setCod(Integer cod) {
         this.cod = cod;
     }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
-
 }
