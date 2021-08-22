@@ -1,7 +1,9 @@
 package com.assignment.spring.services.external;
 
+import com.assignment.spring.utils.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -11,16 +13,35 @@ import com.assignment.spring.models.external.openweatherapi.WeatherResponse;
 import com.assignment.spring.services.ServiceWeather;
 import com.assignment.spring.services.core.ServiceClientHttp;
 
+import javax.crypto.SecretKeyFactory;
+import java.security.NoSuchAlgorithmException;
+
 @Service
 public class ServiceOpenWeather extends ServiceClientHttp {
 	
 	private final Logger logger = LoggerFactory.getLogger(ServiceWeather.class);
 
-	@Value("${openweather.appid}")
-    private String openweatherAppId;
-	
-	@Value("${openweather.api.baseurl}")
-    private String openweatherBaseUrl;
+    private final String openweatherAppId;
+
+	private final String openweatherBaseUrl;
+
+	@Autowired
+	public ServiceOpenWeather(
+			@Value("${openweather.api.baseurl}") String openweatherBaseUrl,
+			@Value("${openweather.appid}") String openweatherAppId
+	) {
+		this.openweatherBaseUrl = openweatherBaseUrl;
+		String appId = "";
+		try {
+			String appSecret = SecurityUtils.getAppSecret();
+			appId = SecurityUtils.decryptAES(
+					openweatherAppId,
+					SecurityUtils.getKeySpec(appSecret));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		this.openweatherAppId = appId;
+	}
 	
 	public WeatherResponse getWeatherByCity(String city){
 		return this.getWeatherByCity(openweatherAppId, openweatherBaseUrl, city);

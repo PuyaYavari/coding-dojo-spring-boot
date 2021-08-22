@@ -3,6 +3,7 @@ package com.assignment.spring.controllers;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import com.assignment.spring.entities.EntityWeather;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -16,7 +17,7 @@ import com.assignment.spring.exceptions.ExceptionOpenweather;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(properties = {
-        "openweather.appid=1887b5688db0b032867a66eadb8dcd14",
+        "openweather.appid=WeskRMJM1YGDE6a6XTRYMq3bthUGmhUrE5kcnDS8dg4zqC7MnFNgnh0G+8LyLM55",
         "openweather.api.baseurl=http://api.openweathermap.org/data/2.5"
 })
 public class ControllerWeatherTest {
@@ -30,7 +31,7 @@ public class ControllerWeatherTest {
 	
 	@Test
 	public void existingCityResponse() {
-        var actual = weatherController.weather(
+		EntityWeather actual = weatherController.weather(
         		"istanbul"
         );
         assertEquals("TR", actual.getCountry());

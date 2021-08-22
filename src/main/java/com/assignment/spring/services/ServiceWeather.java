@@ -1,5 +1,6 @@
 package com.assignment.spring.services;
 
+import com.assignment.spring.mappers.MapperEntityWeather;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,14 @@ public class ServiceWeather {
     
     @Autowired
     private ServiceOpenWeather openweatherService;
-	
+
+    @Autowired
+    MapperEntityWeather entityWeatherMapper;
+
 	public EntityWeather getWeatherByCity(String city){
 		WeatherResponse response = openweatherService.getWeatherByCity(city);
 		
-		EntityWeather entity = mapToWeatherEntity(response);
+		EntityWeather entity = entityWeatherMapper.mapFromWeatherResponse(response);
 		
         weatherRepository.save(entity);
         logger.info(String.format("Weather data for %s saved to database.", city));
