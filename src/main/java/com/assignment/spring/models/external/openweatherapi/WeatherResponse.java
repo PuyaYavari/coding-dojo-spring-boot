@@ -5,6 +5,9 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
+/**
+ * OpenWeather api weather request response model
+ */
 public class WeatherResponse {
 
     @JsonProperty("coord")

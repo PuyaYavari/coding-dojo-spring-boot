@@ -42,11 +42,23 @@ public class ServiceOpenWeather extends ServiceClientHttp {
 		}
 		this.openweatherAppId = appId;
 	}
-	
+
+	/**
+	 * This function requests weather information of the given city from the OpenWeather api.
+	 * @param city The name of the city to get weather information of
+	 * @return Response returned by the OpenWeather api
+	 */
 	public WeatherResponse getWeatherByCity(String city){
 		return this.getWeatherByCity(openweatherAppId, openweatherBaseUrl, city);
 	}
-	
+
+	/**
+	 * This function requests weather information of the given city from the OpenWeather api.
+	 * @param openweatherAppId OpenWeather application ID provided by OpenWeather
+	 * @param openweatherBaseUrl OpenWeather api base url
+	 * @param city The name of the city to get weather information of
+	 * @return Response returned by the OpenWeather api
+	 */
 	public WeatherResponse getWeatherByCity(
 			String openweatherAppId,
 			String openweatherBaseUrl,

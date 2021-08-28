@@ -25,6 +25,11 @@ public class ServiceWeather {
     @Autowired
     MapperEntityWeather entityWeatherMapper;
 
+    /**
+     * gets temperature data of the given city.
+     * @param city The name of the city to get the temperature data of
+     * @return Temperature data of the given city
+     */
 	public EntityWeather getWeatherByCity(String city){
 		WeatherResponse response = openweatherService.getWeatherByCity(city);
 		
@@ -35,12 +40,4 @@ public class ServiceWeather {
         
         return entity;
 	}
-	
-	protected EntityWeather mapToWeatherEntity(WeatherResponse response) {
-        EntityWeather entity = new EntityWeather();
-        entity.setCity(response.getName());
-        entity.setCountry(response.getSys().getCountry());
-        entity.setTemperature(response.getMain().getTemp());
-        return entity;
-    }
 }

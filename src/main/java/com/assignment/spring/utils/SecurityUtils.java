@@ -19,6 +19,12 @@ public class SecurityUtils {
         return "ExampleSecretKey";
     }
 
+    /**
+     * Converts given string into SecretKeySpec
+     * @param myKey Input string to convert to SecretKeySpec
+     * @return SecretKeySpec of the given string
+     * @throws NoSuchAlgorithmException
+     */
     public static SecretKeySpec getKeySpec(String myKey) throws NoSuchAlgorithmException {
         String algorithm = "AES";
         MessageDigest sha;
@@ -29,6 +35,12 @@ public class SecurityUtils {
         return new SecretKeySpec(key, algorithm);
     }
 
+    /**
+     * AES encrypts the given string using given SecretKeySpec
+     * @param strToEncrypt Raw string to encrypt
+     * @param secretKey SecretKeySpec to use for encryption
+     * @return AES encrypted string
+     */
     public static String encryptAES(String strToEncrypt, SecretKeySpec secretKey)
     {
         try
@@ -44,6 +56,12 @@ public class SecurityUtils {
         return null;
     }
 
+    /**
+     * AES decrypts the given string using given SecretKeySpec
+     * @param strToDecrypt Encrypted string
+     * @param secretKey Key to use for decryption
+     * @return AES decrypted string
+     */
     public static String decryptAES(String strToDecrypt, SecretKeySpec secretKey)
     {
         try

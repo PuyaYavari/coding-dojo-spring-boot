@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.assignment</groupId>
     <artifactId>coding-dojo-spring-boot</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>coding-dojo-spring-boot</name>
     <description>Spring Boot Coding Dojo</description>
 
@@ -82,6 +82,10 @@
             </testResource>
         </testResources>
         <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

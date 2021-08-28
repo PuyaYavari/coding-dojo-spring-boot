@@ -10,6 +10,10 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 
+/**
+ * Base HTTP client Service. All services that send any type of HTTP request
+ * inherit this service and use this services methods
+ */
 @Service
 public class ServiceClientHttp {
 	
@@ -21,7 +25,15 @@ public class ServiceClientHttp {
 	public ServiceClientHttp() {
 		
 	}
-	
+
+	/**
+	 * HTTP get request from a REST endpoint.
+	 * @param uriBuilder Builder of the endpoint url.
+	 * @param returnType Expected return type.
+	 * @param <T> Expected return type.
+	 * @return Response of the sent request which is an instance of the expected type.
+	 * if the response is not successful returns null.
+	 */
 	public <T> T get(
 			UriComponentsBuilder uriBuilder,
 			Class<T> returnType
