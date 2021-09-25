@@ -1,6 +1,5 @@
 package com.assignment.spring.services.core;
 
-import com.assignment.spring.utils.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +18,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class ServiceClientHttp {
 	
 	private final Logger logger = LoggerFactory.getLogger(ServiceClientHttp.class);
-
-	@Autowired
-	protected SecurityUtils securityUtils;
 
 	@Autowired
 	protected RestTemplate restTemplate;

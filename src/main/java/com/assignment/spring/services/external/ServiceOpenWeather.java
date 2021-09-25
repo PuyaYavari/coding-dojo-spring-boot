@@ -1,9 +1,7 @@
 package com.assignment.spring.services.external;
 
-import com.assignment.spring.utils.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,13 +16,13 @@ import javax.crypto.SecretKeyFactory;
 import java.security.NoSuchAlgorithmException;
 
 @Service
-public class ServiceOpenWeather extends ServiceClientHttp implements InitializingBean {
+public class ServiceOpenWeather extends ServiceClientHttp  {
 
 	private final Logger logger = LoggerFactory.getLogger(ServiceWeather.class);
 
 	private final String openweatherBaseUrl;
 
-    private String openweatherAppId;
+    private final String openweatherAppId;
 
 	@Autowired
 	public ServiceOpenWeather(
@@ -34,16 +32,6 @@ public class ServiceOpenWeather extends ServiceClientHttp implements Initializin
 		super();
 		this.openweatherBaseUrl = openweatherBaseUrl;
 		this.openweatherAppId = openweatherAppId;
-	}
-
-	@Override
-	public void afterPropertiesSet() {
-		try {
-			String appSecret = securityUtils.getAppSecret();
-			this.openweatherAppId = securityUtils.decryptAES(this.openweatherAppId,appSecret);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	/**

@@ -13,4 +13,4 @@ psql -h db -U "docker" -c "GRANT ALL PRIVILEGES ON DATABASE \"Weather\" TO \"doc
 
 mvn clean package -Dmaven.test.skip
 
-java -jar "/application/weather/target/coding-dojo-spring-boot-1.0.0.jar" --app.secret=$APP_SECRET
+java -jar "/application/weather/target/coding-dojo-spring-boot-1.0.0.jar"
