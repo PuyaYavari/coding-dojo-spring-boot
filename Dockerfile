@@ -7,4 +7,6 @@ RUN apt-get update \
     apt-get install --no-install-recommends --assume-yes \
       postgresql-client
 RUN apt-get -y install maven
+ARG SECRET
+ENV APP_SECRET=$SECRET
 ENTRYPOINT ["/application/weather/docker-entrypoint.sh"]

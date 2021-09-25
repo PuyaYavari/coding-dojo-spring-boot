@@ -1,22 +1,32 @@
 package com.assignment.spring.utils;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.IOException;
-import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.util.Arrays;
 import java.util.Base64;
-import java.util.Properties;
 
 @Component
 public class SecurityUtils {
-    public static String getAppSecret() {
-        return "ExampleSecretKey";
+
+    private final String appSecret;
+
+    @Autowired
+    public SecurityUtils(@Value("${app.secret}") String appSecret) {
+        this.appSecret = appSecret;
+    }
+
+    /**
+     * Used to get application Secret
+     * @return application secret  key
+     */
+    public String getAppSecret() {
+        return appSecret;
     }
 
     /**
@@ -25,7 +35,7 @@ public class SecurityUtils {
      * @return SecretKeySpec of the given string
      * @throws NoSuchAlgorithmException
      */
-    public static SecretKeySpec getKeySpec(String myKey) throws NoSuchAlgorithmException {
+    public SecretKeySpec getKeySpec(String myKey) throws NoSuchAlgorithmException {
         String algorithm = "AES";
         MessageDigest sha;
         byte[] key = myKey.getBytes(StandardCharsets.UTF_8);
@@ -41,7 +51,7 @@ public class SecurityUtils {
      * @param secretKey SecretKeySpec to use for encryption
      * @return AES encrypted string
      */
-    public static String encryptAES(String strToEncrypt, SecretKeySpec secretKey)
+    public String encryptAES(String strToEncrypt, SecretKeySpec secretKey)
     {
         try
         {
@@ -62,7 +72,7 @@ public class SecurityUtils {
      * @param secretKey Key to use for decryption
      * @return AES decrypted string
      */
-    public static String decryptAES(String strToDecrypt, SecretKeySpec secretKey)
+    public String decryptAES(String strToDecrypt, SecretKeySpec secretKey)
     {
         try
         {
