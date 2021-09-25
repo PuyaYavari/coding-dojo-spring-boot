@@ -69,6 +69,7 @@ public class ServiceOpenWeather extends ServiceClientHttp implements Initializin
 			String openweatherBaseUrl,
 			String city
 	) {
+		logger.debug(String.format("Retrieving Weather data for %s from OpenWeather API.", city));
 		UriComponentsBuilder builder = 
 				UriComponentsBuilder.fromHttpUrl(openweatherBaseUrl)
 					.pathSegment("weather")
@@ -78,7 +79,7 @@ public class ServiceOpenWeather extends ServiceClientHttp implements Initializin
 				builder,
 				WeatherResponse.class);
 		if(weatherResponse != null) {
-			logger.info(String.format("Weather data for %s retreived from OpenWeather API.", city));
+			logger.info(String.format("Weather data for %s retrieved from OpenWeather API.", city));
 			return weatherResponse;			
 		} else {
 			logger.error(String.format("No weather data found for %s.", city));

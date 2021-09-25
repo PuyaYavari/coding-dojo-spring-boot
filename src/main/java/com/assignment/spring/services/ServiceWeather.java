@@ -34,7 +34,8 @@ public class ServiceWeather {
 		WeatherResponse response = openweatherService.getWeatherByCity(city);
 		
 		EntityWeather entity = entityWeatherMapper.mapFromWeatherResponse(response);
-		
+
+        logger.debug(String.format("Weather data for %s is being saved to database.", city));
         weatherRepository.save(entity);
         logger.info(String.format("Weather data for %s saved to database.", city));
         
