@@ -30,54 +30,17 @@ public class SecurityUtils {
     }
 
     /**
-     * Converts given string into SecretKeySpec
-     * @param myKey Input string to convert to SecretKeySpec
-     * @return SecretKeySpec of the given string
-     * @throws NoSuchAlgorithmException
-     */
-    public SecretKeySpec getKeySpec(String myKey) throws NoSuchAlgorithmException {
-        String algorithm = "AES";
-        MessageDigest sha;
-        byte[] key = myKey.getBytes(StandardCharsets.UTF_8);
-        sha = MessageDigest.getInstance("SHA-1");
-        key = sha.digest(key);
-        key = Arrays.copyOf(key, 16);
-        return new SecretKeySpec(key, algorithm);
-    }
-
-    /**
-     * AES encrypts the given string using given SecretKeySpec
-     * @param strToEncrypt Raw string to encrypt
-     * @param secretKey SecretKeySpec to use for encryption
-     * @return AES encrypted string
-     */
-    public String encryptAES(String strToEncrypt, SecretKeySpec secretKey)
-    {
-        try
-        {
-            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
-            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-            return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes(StandardCharsets.UTF_8)));
-        }
-        catch (Exception e)
-        {
-            System.out.println("Error while encrypting: " + e);
-        }
-        return null;
-    }
-
-    /**
      * AES decrypts the given string using given SecretKeySpec
      * @param strToDecrypt Encrypted string
      * @param secretKey Key to use for decryption
      * @return AES decrypted string
      */
-    public String decryptAES(String strToDecrypt, SecretKeySpec secretKey)
+    public String decryptAES(String strToDecrypt, String secretKey)
     {
         try
         {
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
-            cipher.init(Cipher.DECRYPT_MODE, secretKey);
+            cipher.init(Cipher.DECRYPT_MODE, this.getKeySpec(secretKey));
             return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
         }
         catch (Exception e)
@@ -85,5 +48,21 @@ public class SecurityUtils {
             System.out.println("Error while decrypting: " + e);
         }
         return null;
+    }
+
+    /**
+     * Converts given string into SecretKeySpec
+     * @param myKey Input string to convert to SecretKeySpec
+     * @return SecretKeySpec of the given string
+     * @throws NoSuchAlgorithmException If SHA-1 algorithm not found
+     */
+    protected SecretKeySpec getKeySpec(String myKey) throws NoSuchAlgorithmException {
+        String algorithm = "AES";
+        MessageDigest sha;
+        byte[] key = myKey.getBytes(StandardCharsets.UTF_8);
+        sha = MessageDigest.getInstance("SHA-1");
+        key = sha.digest(key);
+        key = Arrays.copyOf(key, 16);
+        return new SecretKeySpec(key, algorithm);
     }
 }

@@ -40,9 +40,7 @@ public class ServiceOpenWeather extends ServiceClientHttp implements Initializin
 	public void afterPropertiesSet() {
 		try {
 			String appSecret = securityUtils.getAppSecret();
-			this.openweatherAppId = securityUtils.decryptAES(
-					this.openweatherAppId,
-					securityUtils.getKeySpec(appSecret));
+			this.openweatherAppId = securityUtils.decryptAES(this.openweatherAppId,appSecret);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
