@@ -4,11 +4,7 @@ public class ExceptionOpenweather extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	private int code;
-
-	public ExceptionOpenweather() {
-		super();
-	}
+	private final int code;
 	
 	public ExceptionOpenweather(String message, int code) {
 		super(message);

@@ -12,10 +12,10 @@ import com.assignment.spring.controllers.ControllerWeather;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(properties = {
-        "openweather.appid=1887b5688db0b032867a66eadb8dcd14",
-        "openweather.api.baseurl=http://api.openweathermap.org/data/2.5"
+		"openweather.appid=appid",
+		"openweather.api.baseurl=http://localhost:8081/data/2.5"
 })
-public class ApplicationTests {
+public class ApplicationTests extends DatabaseMockedTest {
 
 	@Autowired
     private ControllerWeather weatherController;
