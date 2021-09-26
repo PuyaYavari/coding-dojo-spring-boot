@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class HandlerRestException extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return handleExceptionInternal(ex, new ModelError(1001, ex.getMessage()),
+        return handleExceptionInternal(ex, new ModelError(2000, ex.getMessage()),
                 new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 

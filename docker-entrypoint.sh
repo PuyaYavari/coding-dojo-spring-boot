@@ -1,15 +1,14 @@
 #!/bin/sh
 
-export PGPASSWORD='docker'
+export PGPASSWORD=$POSTGRES_PASSWORD
 
-until psql -h db -U "docker" -c '\q'; do
+until psql -h db -U $POSTGRES_USER -c '\q'; do
   >&2 echo "Postgres is unavailable - sleeping"
   sleep 1
 done
 
-psql -h db -U "docker" -c "CREATE USER \"docker\""
-psql -h db -U "docker" -c "CREATE DATABASE \"Weather\""
-psql -h db -U "docker" -c "GRANT ALL PRIVILEGES ON DATABASE \"Weather\" TO \"docker\""
+psql -h db -U $POSTGRES_USER -c "CREATE DATABASE \"Weather\""
+psql -h db -U $POSTGRES_USER -c "GRANT ALL PRIVILEGES ON DATABASE \"Weather\" TO $POSTGRES_USER"
 
 mvn clean package
 

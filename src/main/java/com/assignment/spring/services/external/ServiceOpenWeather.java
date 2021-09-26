@@ -69,7 +69,7 @@ public class ServiceOpenWeather extends ServiceClientHttp  {
 			return weatherResponse;			
 		} else {
 			logger.error(String.format("No weather data found for %s.", city));
-			throw new ExceptionOpenweather("No data found for given city!",2000);
+			throw new ExceptionOpenweather("No data found for given city!",2001);
 		}
 	}
 	

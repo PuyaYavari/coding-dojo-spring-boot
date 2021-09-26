@@ -32,3 +32,6 @@ build/
 
 bin/**
 /data/
+
+### env file ###
+.env
