@@ -11,6 +11,6 @@ psql -h db -U "docker" -c "CREATE USER \"docker\""
 psql -h db -U "docker" -c "CREATE DATABASE \"Weather\""
 psql -h db -U "docker" -c "GRANT ALL PRIVILEGES ON DATABASE \"Weather\" TO \"docker\""
 
-mvn clean package -Dmaven.test.skip
+mvn clean package
 
 java -jar "/application/weather/target/coding-dojo-spring-boot-1.0.0.jar"
